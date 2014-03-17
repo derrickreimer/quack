@@ -23,53 +23,5 @@ module Quack
     def type_matches?(other)
       type_class == other.type_class
     end
-
-    def ==(other)
-      if type_matches?(other)
-        to_coerced == other.to_coerced
-      else
-        to_s == other.to_s
-      end
-    end
-
-    def <(other)
-      if type_matches?(other)
-        to_coerced < other.to_coerced
-      else
-        to_s < other.to_s
-      end
-    end
-
-    def >(other)
-      if type_matches?(other)
-        to_coerced > other.to_coerced
-      else
-        to_s > other.to_s
-      end
-    end
-
-    def <=(other)
-      if type_matches?(other)
-        to_coerced <= other.to_coerced
-      else
-        to_s <= other.to_s
-      end
-    end
-
-    def >=(other)
-      if type_matches?(other)
-        to_coerced >= other.to_coerced
-      else
-        to_s >= other.to_s
-      end
-    end
-
-    def <=>(other)
-      if type_matches?(other)
-        to_coerced <=> other.to_coerced
-      else
-        to_s <=> other.to_s
-      end
-    end
   end
 end

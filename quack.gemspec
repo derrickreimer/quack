@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Quack::VERSION
   spec.authors       = ["Derrick Reimer"]
   spec.email         = ["derrickreimer@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{A simple type coercion library}
+  spec.summary       = %q{Quack is a simple type coercion library for scalar Ruby objects}
+  spec.homepage      = "https://github.com/djreimer/quack"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
