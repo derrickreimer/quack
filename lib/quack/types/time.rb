@@ -20,21 +20,25 @@ module Quack
           [::Time]
         end
 
-        def matches?(value)
-          built_in_types.include?(value.class) || !!(value.to_s =~ ISO_8601)
+        def already_coerced?(value)
+          built_in_types.include?(value.class)
         end
-      end
 
-      def already_cast?
-        self.class.built_in_types.include?(value.class)
+        def matches?(value)
+          already_coerced?(value) || !!(value.to_s =~ ISO_8601)
+        end
       end
 
       def parse_offset(offset)
         offset == "Z" ? UTC : offset
       end
 
+      def already_coerced?
+        self.class.already_coerced?(value)
+      end
+
       def to_coerced
-        return value if already_cast?
+        return value if already_coerced?
         parts = value.to_s.scan(ISO_8601).flatten
         offset = parse_offset(parts.pop)
         parts = parts.map(&:to_i) << offset

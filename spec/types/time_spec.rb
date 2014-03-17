@@ -19,7 +19,7 @@ describe Quack::Types::Time do
     end
   end
 
-  describe "#cast" do
+  describe "#to_coerced" do
     it "should cast ISO 8601 UTC times" do
       type = Quack::Types::Time.new("2014-03-22T03:00:00Z")
       expected = Time.new(2014, 3, 22, 3, 0, 0, "+00:00")
@@ -30,6 +30,11 @@ describe Quack::Types::Time do
       type = Quack::Types::Time.new("2014-03-22T03:00:00-07:00")
       expected = Time.new(2014, 3, 22, 3, 0, 0, "-07:00")
       type.to_coerced.must_equal(expected)
+    end
+
+    it "should raise a ParseError for invalid dates" do
+      type = Quack::Types::Time.new("2014-03-22")
+      proc { type.to_coerced }.must_raise(Quack::ParseError)
     end
   end
 end

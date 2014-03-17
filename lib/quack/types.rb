@@ -1,4 +1,6 @@
+require "quack/types/null"
 require "quack/types/integer"
+require "quack/types/float"
 require "quack/types/boolean"
 require "quack/types/time"
 require "quack/types/string"
@@ -8,9 +10,13 @@ module Quack
     extend Enumerable
 
     TYPES = [
+      Quack::Types::Null,
       Quack::Types::Integer,
+      Quack::Types::Float,
       Quack::Types::Boolean,
-      Quack::Types::Time
+      Quack::Types::Time,
+      # ... insert new types here ...
+      Quack::Types::String # must be last!
     ]
 
     def self.each

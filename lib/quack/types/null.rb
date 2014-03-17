@@ -2,15 +2,15 @@ require "quack/type"
 
 module Quack
   module Types
-    class Boolean < Quack::Type
+    class Null < Quack::Type
       class << self
         def matches?(value)
-          value.to_s == "true" || value.to_s == "false"
+          value.nil?
         end
       end
 
       def to_coerced
-        value.to_s == "true"
+        nil
       end
     end
   end

@@ -9,7 +9,6 @@ module Quack
 
     def guess_type
       @type_class = Quack::Types.select { |t| t.matches?(value) }.first
-      @type_class ||= Quack::Types::String
       @type_instance = type_class.new(value)
     end
 
@@ -62,6 +61,14 @@ module Quack
         to_coerced >= other.to_coerced
       else
         to_s >= other.to_s
+      end
+    end
+
+    def <=>(other)
+      if type_matches?(other)
+        to_coerced <=> other.to_coerced
+      else
+        to_s <=> other.to_s
       end
     end
   end
