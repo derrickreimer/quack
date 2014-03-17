@@ -27,7 +27,7 @@ Quack is able to guess the following type categories and cast values to appropri
 - `Null`
 - `String`
 
-## Integer
+### Integer
 
 ```ruby
 value = Quack("123")
@@ -39,7 +39,7 @@ value.to_coerced.class
 #=> Fixnum
 ```
 
-## Float
+### Float
 
 ```ruby
 value = Quack("29.4")
@@ -51,7 +51,7 @@ value.to_coerced.class
 #=> Float
 ```
 
-## Time
+### Time
 
 ```ruby
 value = Quack("2014-03-22T03:00:00Z")
@@ -63,7 +63,7 @@ value.to_coerced.class
 #=> Time
 ```
 
-## Boolean
+### Boolean
 
 ```ruby
 value = Quack("true")
@@ -83,7 +83,7 @@ value.to_coerced.class
 #=> FalseClass
 ```
 
-## Null
+### Null
 
 ```ruby
 value = Quack(nil)
@@ -95,7 +95,7 @@ value.to_coerced.class
 #=> NilClass
 ```
 
-## String
+### String
 
 ```ruby
 value = Quack("foo")
