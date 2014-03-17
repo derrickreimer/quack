@@ -24,6 +24,10 @@ module Quack
       raise NotImplementedError
     end
 
+    def type_matches?(other)
+      self.class == other.class
+    end
+
     def to_s
       to_coerced.to_s
     end
