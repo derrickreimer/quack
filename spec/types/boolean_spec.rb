@@ -23,25 +23,25 @@ describe Quack::Types::Boolean do
     end
   end
 
-  describe "#cast" do
+  describe "#to_coerced" do
     it "should return true if original value is true" do
       type = Quack::Types::Boolean.new(true)
-      type.cast.must_equal(true)
+      type.to_coerced.must_equal(true)
     end
 
     it "should return true if original value is true" do
       type = Quack::Types::Boolean.new(false)
-      type.cast.must_equal(false)
+      type.to_coerced.must_equal(false)
     end
 
     it "should cast 'true' string to true" do
       type = Quack::Types::Boolean.new("true")
-      type.cast.must_equal(true)
+      type.to_coerced.must_equal(true)
     end
 
     it "should cast 'false' string to true" do
       type = Quack::Types::Boolean.new("false")
-      type.cast.must_equal(false)
+      type.to_coerced.must_equal(false)
     end
   end
 end

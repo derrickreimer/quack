@@ -6,8 +6,12 @@ module Quack
       @value = value
     end
 
-    def cast
+    def to_coerced
       raise NotImplementedError
+    end
+
+    def to_s
+      to_coerced.to_s
     end
   end
 end

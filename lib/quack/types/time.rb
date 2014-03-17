@@ -21,8 +21,7 @@ module Quack
         end
 
         def matches?(value)
-          built_in_types.include?(value.class) || 
-            !!(value.to_s =~ ISO_8601)
+          built_in_types.include?(value.class) || !!(value.to_s =~ ISO_8601)
         end
       end
 
@@ -30,20 +29,22 @@ module Quack
         self.class.built_in_types.include?(value.class)
       end
 
-      def cast
-        return value if already_cast?
-        match = value.to_s.match(ISO_8601)
-        offset = match[:offset] == "Z" ? UTC : match[:offset]
+      def parse_offset(offset)
+        offset == "Z" ? UTC : offset
+      end
 
-        ::Time.new(
-          match[:year].to_i,
-          match[:month].to_i,
-          match[:day].to_i,
-          match[:hour].to_i,
-          match[:minute].to_i,
-          match[:second].to_i,
-          offset
-        )
+      def to_coerced
+        return value if already_cast?
+        parts = value.to_s.scan(ISO_8601).flatten
+        offset = parse_offset(parts.pop)
+        parts = parts.map(&:to_i) << offset
+        ::Time.new(*parts)
+      rescue => ex
+        raise ParseError.new(ex.message)
+      end
+
+      def to_s
+        to_coerced.iso8061
       end
     end
   end

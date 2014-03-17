@@ -19,16 +19,16 @@ describe Quack::Types::Integer do
     end
   end
 
-  describe "#cast" do
+  describe "#to_coerced" do
     it "should return original value if its a Fixnum" do
       type = Quack::Types::Integer.new(2)
-      type.cast.must_equal(2)
+      type.to_coerced.must_equal(2)
     end
 
     it "should cast integer strings to Fixnum" do
       type = Quack::Types::Integer.new("123")
-      type.cast.must_equal(123)
-      type.cast.class.must_equal(Fixnum)
+      type.to_coerced.must_equal(123)
+      type.to_coerced.class.must_equal(Fixnum)
     end
   end
 end

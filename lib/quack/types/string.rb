@@ -2,17 +2,15 @@ require "quack/type"
 
 module Quack
   module Types
-    class Integer < Quack::Type
-      PATTERN = /\A\d+\z/
-
+    class String < Quack::Type
       class << self
         def matches?(value)
-          !!(value.to_s.strip =~ PATTERN)
+          true
         end
       end
 
       def to_coerced
-        value.to_i
+        value.to_s
       end
     end
   end

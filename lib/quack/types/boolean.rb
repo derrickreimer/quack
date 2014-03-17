@@ -9,7 +9,7 @@ module Quack
         end
       end
 
-      def cast
+      def to_coerced
         return true if value.to_s == "true"
         false
       end
