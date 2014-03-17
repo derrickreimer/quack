@@ -37,4 +37,18 @@ describe Quack::Types::Time do
       proc { type.to_coerced }.must_raise(Quack::ParseError)
     end
   end
+
+  describe "#to_s" do
+    it "should cast UTC times to ISO 8601 strings" do
+      time = Time.utc(2014, 3, 22, 3, 10, 12)
+      type = Quack::Types::Time.new(time)
+      type.to_s.must_equal("2014-03-22T03:10:12Z")
+    end
+
+    it "should cast non-UTC times to ISO 8601 strings" do
+      time = Time.new(2014, 3, 22, 3, 10, 12, "-07:00")
+      type = Quack::Types::Time.new(time)
+      type.to_s.must_equal("2014-03-22T03:10:12-07:00")
+    end
+  end
 end

@@ -27,6 +27,32 @@ describe Quack::Value do
     end
   end
 
+  describe "given a string float" do
+    let(:value) { "123.4" }
+    let(:subject) { Quack::Value.new(value) }
+    
+    it "should convert to a Float" do
+      subject.to_coerced.must_equal(123.4)
+    end
+
+    it "should have Float type" do
+      subject.type_class.must_equal(Quack::Types::Float)
+    end
+  end
+
+  describe "given a Float" do
+    let(:value) { 123.4 }
+    let(:subject) { Quack::Value.new(value) }
+    
+    it "should return the original value" do
+      subject.to_coerced.must_equal(123.4)
+    end
+
+    it "should have Float type" do
+      subject.type_class.must_equal(Quack::Types::Float)
+    end
+  end
+
   describe "given a 'true' string" do
     let(:value) { "true" }
     let(:subject) { Quack::Value.new(value) }

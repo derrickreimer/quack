@@ -7,7 +7,7 @@ module Quack
 
       class << self
         def built_in_types
-          [::Fixnum]
+          [Fixnum, Bignum]
         end
 
         def matches?(value)

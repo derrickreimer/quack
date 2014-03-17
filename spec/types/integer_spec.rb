@@ -6,8 +6,13 @@ describe Quack::Types::Integer do
       Quack::Types::Integer.matches?("123").must_equal(true)
     end
 
-    it "should be true for integers" do
+    it "should be true for Fixnum" do
       Quack::Types::Integer.matches?(123).must_equal(true)
+    end
+
+    it "should be true for Bignum" do
+      num = 232305722798259244150093798251441
+      Quack::Types::Integer.matches?(num).must_equal(true)
     end
 
     it "should be false for float strings" do
@@ -23,6 +28,12 @@ describe Quack::Types::Integer do
     it "should return original value if its a Fixnum" do
       type = Quack::Types::Integer.new(2)
       type.to_coerced.must_equal(2)
+    end
+
+    it "should return original value if its a Bignum" do
+      num = 232305722798259244150093798251441
+      type = Quack::Types::Integer.new(num)
+      type.to_coerced.must_equal(num)
     end
 
     it "should cast integer strings to Fixnum" do

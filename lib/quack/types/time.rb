@@ -1,3 +1,4 @@
+require "time"
 require "quack/type"
 
 module Quack
@@ -40,7 +41,7 @@ module Quack
       end
 
       def to_s
-        to_coerced.iso8061
+        to_coerced.iso8601
       end
     end
   end
