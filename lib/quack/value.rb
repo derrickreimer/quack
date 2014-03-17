@@ -4,10 +4,6 @@ module Quack
 
     def initialize(value)
       @value = value
-      guess_type
-    end
-
-    def guess_type
       @type_class = Quack::Types.select { |t| t.matches?(value) }.first
       @type_instance = type_class.new(value)
     end
