@@ -20,10 +20,6 @@ module Quack
           [::Time]
         end
 
-        def already_coerced?(value)
-          built_in_types.include?(value.class)
-        end
-
         def matches?(value)
           already_coerced?(value) || !!(value.to_s =~ ISO_8601)
         end
@@ -31,10 +27,6 @@ module Quack
 
       def parse_offset(offset)
         offset == "Z" ? UTC : offset
-      end
-
-      def already_coerced?
-        self.class.already_coerced?(value)
       end
 
       def to_coerced

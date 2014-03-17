@@ -6,13 +6,17 @@ module Quack
       PATTERN = /\A\d+\z/
 
       class << self
+        def built_in_types
+          [::Fixnum]
+        end
+
         def matches?(value)
-          !!(value.to_s.strip =~ PATTERN)
+          already_coerced?(value) || !!(value.to_s.strip =~ PATTERN)
         end
       end
 
       def to_coerced
-        value.to_i
+        already_coerced? ? value : value.to_i
       end
     end
   end

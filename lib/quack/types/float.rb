@@ -10,22 +10,13 @@ module Quack
           [::Float]
         end
 
-        def already_coerced?(value)
-          built_in_types.include?(value.class)
-        end
-
         def matches?(value)
           already_coerced?(value) || !!(value.to_s.strip =~ PATTERN)
         end
       end
 
-      def already_coerced?
-        self.class.already_coerced?(value)
-      end
-
       def to_coerced
-        return value if already_coerced?
-        value.to_f
+        already_coerced? ? value : value.to_f
       end
     end
   end

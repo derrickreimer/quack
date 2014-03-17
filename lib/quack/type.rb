@@ -6,6 +6,20 @@ module Quack
       @value = value
     end
 
+    class << self
+      def built_in_types
+        []
+      end
+
+      def already_coerced?(value)
+        built_in_types.include?(value.class)
+      end
+    end
+
+    def already_coerced?
+      self.class.already_coerced?(value)
+    end
+
     def to_coerced
       raise NotImplementedError
     end
