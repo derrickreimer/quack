@@ -3,18 +3,26 @@ require "test_helper"
 describe Quack::Types::Time do
   describe ".matches?" do
     it "should be true for Time objects" do
-      Quack::Types::Time.matches?(Time.new(2014, 3, 22)).must_equal(true)
+      input = Time.new(2014, 3, 22)
+      Quack::Types::Time.matches?(input).must_equal(true)
     end
 
     it "should be true for ISO 8601 UTC times" do
-      Quack::Types::Time.matches?("2014-03-22T03:00:00Z").must_equal(true)
+      input = "2014-03-22T03:00:00Z"
+      Quack::Types::Time.matches?(input).must_equal(true)
     end
 
     it "should be true for ISO 8601 non-UTC times" do
-      Quack::Types::Time.matches?("2014-03-22T03:00:00-08:00").must_equal(true)
+      input = "2014-03-22T03:00:00-08:00"
+      Quack::Types::Time.matches?(input).must_equal(true)
     end
 
-    it "should be false for non ISO 8601 dates" do
+    it "should be true for YMD formatted times" do
+      input = "2014-03-22"
+      Quack::Types::Time.matches?(input).must_equal(true)
+    end
+
+    it "should be false for invalid dates" do
       Quack::Types::Time.matches?("3/22/2014").must_equal(false)
     end
   end
@@ -32,8 +40,14 @@ describe Quack::Types::Time do
       type.to_coerced.must_equal(expected)
     end
 
-    it "should raise a ParseError for invalid dates" do
+    it "should cast YMD formatted times" do
       type = Quack::Types::Time.new("2014-03-22")
+      expected = Time.new(2014, 3, 22, 0, 0, 0, "+00:00")
+      type.to_coerced.must_equal(expected)
+    end
+
+    it "should raise a ParseError for invalid dates" do
+      type = Quack::Types::Time.new("foo")
       proc { type.to_coerced }.must_raise(Quack::ParseError)
     end
   end
