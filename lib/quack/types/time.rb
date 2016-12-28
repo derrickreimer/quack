@@ -4,13 +4,13 @@ require "quack/type"
 module Quack
   module Types
     class Time < Quack::Type
-      YMD_FORMAT = /
+      YMD_FORMAT = /\A
         (?<year>\d{4})(-|\/)
         (?<month>\d{2})(-|\/)
         (?<day>\d{2})
-      /x
+      \z/x
 
-      ISO_8601 = /
+      ISO_8601 = /\A
         (?<year>\d{4})-
         (?<month>\d{2})-
         (?<day>\d{2})T
@@ -18,7 +18,7 @@ module Quack
         (?<minute>\d{2}):
         (?<second>\d{2})
         (?<offset>Z|(\+|-)(\d{2}):(\d{2}))
-      /x
+      \z/x
 
       UTC = "+00:00"
 
@@ -28,11 +28,11 @@ module Quack
         end
 
         def iso_8601?(value)
-          !!(value.to_s =~ ISO_8601)
+          !!(value.to_s.strip =~ ISO_8601)
         end
 
         def ymd?(value)
-          !!(value.to_s =~ YMD_FORMAT)
+          !!(value.to_s.strip =~ YMD_FORMAT)
         end
 
         def matches?(value)
