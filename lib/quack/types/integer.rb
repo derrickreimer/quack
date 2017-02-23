@@ -8,7 +8,7 @@ module Quack
       class << self
         def built_in_types
           @@built_in_types ||=
-            [1.class, 10000000000000000000.class].uniq
+            ObjectSpace.each_object(Integer.singleton_class).to_a
         end
 
         def matches?(value)
