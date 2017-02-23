@@ -7,7 +7,8 @@ module Quack
 
       class << self
         def built_in_types
-          [Fixnum, Bignum]
+          @@built_in_types ||=
+            [1.class, 10000000000000000000.class].uniq
         end
 
         def matches?(value)
