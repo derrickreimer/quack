@@ -36,6 +36,18 @@ value.class
 value.to_coerced
 #=> 123
 value.to_coerced.class
+#=> Integer
+```
+
+### Integer (Ruby 2.3 and earlier)
+
+```ruby
+value = Quack("123")
+value.class
+#=> Quack::Types::Integer
+value.to_coerced
+#=> 123
+value.to_coerced.class
 #=> Fixnum
 ```
 

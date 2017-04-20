@@ -7,7 +7,8 @@ module Quack
 
       class << self
         def built_in_types
-          [Fixnum, Bignum]
+          @@built_in_types ||=
+            ObjectSpace.each_object(Integer.singleton_class).to_a
         end
 
         def matches?(value)
