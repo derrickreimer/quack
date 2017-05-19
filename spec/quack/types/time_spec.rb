@@ -46,6 +46,11 @@ describe Quack::Types::Time do
       type.to_coerced.must_equal(expected)
     end
 
+    it "should raise a ParseError for dates out of range" do
+      type = Quack::Types::Time.new("0000-00-00")
+      proc { type.to_coerced }.must_raise(Quack::ParseError)
+    end
+
     it "should raise a ParseError for invalid dates" do
       type = Quack::Types::Time.new("foo")
       proc { type.to_coerced }.must_raise(Quack::ParseError)

@@ -14,7 +14,7 @@ describe Quack::Types::Null do
   describe "#to_coerced" do
     it "should return nil" do
       type = Quack::Types::Null.new(nil)
-      type.to_coerced.must_equal(nil)
+      type.to_coerced.must_be_nil
     end
   end
 end
