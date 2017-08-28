@@ -3,7 +3,7 @@ require "quack/type"
 module Quack
   module Types
     class Integer < Quack::Type
-      PATTERN = /\A\d+\z/
+      PATTERN = /\A-?\d+\z/
 
       class << self
         def built_in_types
