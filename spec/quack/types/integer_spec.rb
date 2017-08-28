@@ -10,6 +10,14 @@ describe Quack::Types::Integer do
       Quack::Types::Integer.matches?(123).must_equal(true)
     end
 
+    it "should be true for negative integer stings" do
+      Quack::Types::Integer.matches?("-123").must_equal(true)
+    end
+
+    it "should be true for negative Integers" do
+      Quack::Types::Integer.matches?(-123).must_equal(true)
+    end
+
     it "should be true for large Integer" do
       num = 232305722798259244150093798251441
       Quack::Types::Integer.matches?(num).must_equal(true)
@@ -21,6 +29,14 @@ describe Quack::Types::Integer do
 
     it "should be false for floats" do
       Quack::Types::Integer.matches?(123.4).must_equal(false)
+    end
+
+    it "should be false for negative float strings" do
+      Quack::Types::Integer.matches?("-123.4").must_equal(false)
+    end
+
+    it "should be false for negative floats" do
+      Quack::Types::Integer.matches?(-123.4).must_equal(false)
     end
   end
 

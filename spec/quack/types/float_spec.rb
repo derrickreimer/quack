@@ -10,12 +10,28 @@ describe Quack::Types::Float do
       Quack::Types::Float.matches?(123.4).must_equal(true)
     end
 
+    it "should be true for negative float strings" do
+      Quack::Types::Float.matches?("-123.4").must_equal(true)
+    end
+
+    it "should be true for negative floats" do
+      Quack::Types::Float.matches?(-123.4).must_equal(true)
+    end
+
     it "should be false for integer strings" do
       Quack::Types::Float.matches?("123").must_equal(false)
     end
 
     it "should be false for integers" do
       Quack::Types::Float.matches?(123).must_equal(false)
+    end
+
+    it "should be false for negative integer strings" do
+      Quack::Types::Float.matches?("-123").must_equal(false)
+    end
+
+    it "should be false for negative integers" do
+      Quack::Types::Float.matches?(-123).must_equal(false)
     end
   end
 

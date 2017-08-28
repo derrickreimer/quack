@@ -3,7 +3,7 @@ require "quack/type"
 module Quack
   module Types
     class Float < Quack::Type
-      PATTERN = /\A\d+\.\d*\z/
+      PATTERN = /\A-?\d+\.\d*\z/
 
       class << self
         def built_in_types
